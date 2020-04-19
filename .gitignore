@@ -1,4 +1,8 @@
 venv
+.vscode
 .idea
-
-prototype/__pycache__/mqtt.cpython-36.pyc
+state/__pycach__
+frontend/node_modules
+frontend/__pycach__/
+state/migrations
+prototype/__pycach__/
