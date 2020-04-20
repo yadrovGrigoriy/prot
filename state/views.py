@@ -1,14 +1,19 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .models import State
-from .serializers import StateSerializer
+from .models import Status, Block
+from .serializers import StatusSerializer, BlockSerializer
 
 
 # Create your views here.
 
 class StatusView(ModelViewSet):
-    queryset = State.objects.order_by("-id")[:1]
-    serializer_class = StateSerializer
+    queryset = Status.objects.order_by("-id")[:1]
+    serializer_class = StatusSerializer
+
+
+class BlockView(ModelViewSet):
+    queryset = Block.objects.order_by("-id")[:1]
+    serializer_class = BlockSerializer
 
 
 def index(request):

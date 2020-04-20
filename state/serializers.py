@@ -1,8 +1,15 @@
 from rest_framework.serializers import ModelSerializer
-from .models import State
+from rest_framework import serializers
+from .models import Status, Block
 
 
-class StateSerializer(ModelSerializer):
+class StatusSerializer(ModelSerializer):
     class Meta:
-        model = State
-        fields = ['status', 'timestamp']
+        model = Status
+        fields = ['status']
+
+
+class BlockSerializer(ModelSerializer):
+    class Meta:
+        model = Block
+        fields = ['block']
