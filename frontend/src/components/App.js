@@ -6,7 +6,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        data:{}
+        data:{
+          status:'',
+          block: false
+        },
+        editStatus:false
      };
   }
 
@@ -36,24 +40,40 @@ class App extends Component {
 }
   handleChange = (event) => {
     this.setState({
-        data:{block:event.target.checked}
+        data:{
+          ...this.state.data,
+          block:event.target.checked
+        }
     })
-    axios.post('api/block', event.target.checked)
+    // axios.post('api/block', event.target.checked)
     console.log(event.target.checked)
   }
 
 
   render() {
+    
     return (
     <>
-       <h1> Status: { this.state.data.status  } </h1>
-         <input
-            type="checkbox"
-            id="block"
-            checked={this.state.data.block}
-            onChange={(event) => this.handleChange(event)}
-        />
-         <label htmlFor="block"> block</label>
+      <div>
+        {
+          this.state.editStatus ?  
+          <div>
+            <input type="text" value={this.state.status} />
+            <button onClick={() => this.setState({editStatus: !this.state.editStatus})}>cancel</button>
+          </div>
+          : 
+          <h3 onClick={() => this.setState({editStatus: !this.state.editStatus})}> Status: { this.state.data.status  } </h3>
+        }
+      </div>   
+
+      <input
+        type="checkbox"
+        id="block"
+        value={this.state.data.block}
+        checked={this.state.data.block}
+        onChange={(event) => this.handleChange(event)}
+      />
+      <label htmlFor="block"> block</label>
     </>
 
     );
