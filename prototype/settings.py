@@ -77,12 +77,24 @@ WSGI_APPLICATION = 'prototype.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_db',
+        'NAME': 'python_proto',
         'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': ''
+        'PASSWORD': 'eTx12345',
+        'HOST':'10.10.10.7',
+        'PORT': '5432'
+
+        # 'NAME': 'django_db',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'password',
+        # 'HOST':'localhost',
+        # 'PORT':''
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+    )
 }
 
 # Password validation

@@ -13,3 +13,5 @@ class BlockSerializer(ModelSerializer):
     class Meta:
         model = Block
         fields = ['block']
+
+

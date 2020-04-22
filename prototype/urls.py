@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 from state.views import StatusView, BlockView
-# from frontend.views import index
+
 
 router = SimpleRouter()
 router.register('api/status', StatusView)

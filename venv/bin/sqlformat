@@ -1,4 +1,4 @@
-#!/home/grinch/code/prototype/venv/bin/python
+#!/home/yadrov/code/prot/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
