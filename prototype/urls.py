@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
-from state.views import StatusView, BlockView
+from state.views import StatusView, HardBlockView, SoftBlockView
 
 
 router = SimpleRouter()
 router.register('api/status', StatusView)
-router.register('api/block', BlockView)
+router.register('api/hard_block', HardBlockView)
+router.register('api/soft_block', SoftBlockView)
 
 
 urlpatterns = [

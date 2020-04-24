@@ -5,6 +5,7 @@ from django.db import models
 
 
 class Status(models.Model):
+    kran_id =  models.IntegerField()
     status = models.CharField(max_length=200)
     timestamp = models.DateTimeField(auto_now_add=True)
 
@@ -16,11 +17,12 @@ class Status(models.Model):
     
 
 
-class Block(models.Model):
+class SoftBlock(models.Model):
+    kran_id =  models.IntegerField()
     block = models.BooleanField()
     timestamp = models.DateTimeField(auto_now_add=True)
     class Meta:
-        db_table = 'block'
+        db_table = 'soft_block'
 
     def __str__(self):
         if self.block == 1:
@@ -28,4 +30,16 @@ class Block(models.Model):
         else:
             return 'not blocked'
 
+class HardBlock(models.Model):
+    kran_id =  models.IntegerField()
+    block = models.BooleanField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        db_table = 'hard_block'
+
+    def __str__(self):
+        if self.block == 1:
+            return 'blocked'
+        else:
+            return 'not blocked'
 
