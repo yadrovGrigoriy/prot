@@ -8,7 +8,11 @@ const TOPICS = [
 	'BBox/client/status/1',
 	'BBox/client/status/2',
 	'BBox/client/soft_block/1',
-	'BBox/client/soft_block/2',
+  'BBox/client/soft_block/2',
+  'BBox/server/soft_block/1',
+  'BBox/server/soft_block/2',
+  'BBox/client/hard_block/1',
+	'BBox/client/hard_block/2',
 	'BBox/server/hard_block/1',
 	'BBox/server/hard_block/2',
 ];
@@ -33,9 +37,9 @@ class App extends Component {
 		// Once a connection has been made, make a subscription and send a message.
 		console.log('onConnectWS');
 
-		client.subscribe(TOPICS.status);
-		client.subscribe(TOPICS.client_topic_soft_block);
-		client.subscribe(TOPICS.client_topic_hard_block);
+		for (let topic of TOPICS){
+      client.subscribe(topic)
+    }
 	};
 
 	onMessageArrived = (msg) => {
