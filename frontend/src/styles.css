@@ -1,0 +1,40 @@
+
+
+.container{
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    padding: 20px;
+    border:1px solid black;
+    border-radius: 4px;
+}
+.buttons{
+    display: flex;
+}
+.button{
+    border:inset;
+    border-radius: 5px;
+    padding: 5px;
+    border-width: 3px;
+    font-weight: bold;
+    margin-right: 10px;
+
+}
+.button:active{
+    box-shadow: 1px 1px 1px 1px;
+    /* border: none; */
+}
+.hidden{
+    display: none;
+}
+.status{
+    margin-top: 0;
+}
