@@ -27,52 +27,52 @@ class App extends Component {
 	};
 
 	onMessageArrived = (msg) => {
-		const [name, source, topic, kran_id] =  msg.destinationName.split('/')
-			switch(`${topic}/${kran_id}`){	
-				case 'status/1':
-					this.setState({
-						...this.state,
-						kran1:{
-							...this.state.kran1,
-							status:msg.payloadString
-						}
-					})
+		const [name, source, topic, kran_id] = msg.destinationName.split('/')
+		switch (`${topic}/${kran_id}`) {
+			case 'status/1':
+				this.setState({
+					...this.state,
+					kran1: {
+						...this.state.kran1,
+						status: msg.payloadString
+					}
+				})
 				break;
-				case 'status/2':
-					this.setState({
-						...this.state,
-						kran2:{
-							...this.state.kran2,
-							status:msg.payloadString
-						}
-					})
+			case 'status/2':
+				this.setState({
+					...this.state,
+					kran2: {
+						...this.state.kran2,
+						status: msg.payloadString
+					}
+				})
 				break;
-				case 'soft_block/1':
-				case 'hard_block/1':
-					this.setState({
-						...this.state,
-						kran1:{
-							...this.state.kran1,
-							[topic]:Boolean(Number(msg.payloadString))
-						}
-					})
-					break;
-				case 'soft_block/2':
-				case 'hard_block/2':
-					this.setState({
-						...this.state,
-						kran2:{
-							...this.state.kran2,
-							[topic]:Boolean(Number(msg.payloadString))
-						}
-					})
+			case 'soft_block/1':
+			case 'hard_block/1':
+				this.setState({
+					...this.state,
+					kran1: {
+						...this.state.kran1,
+						[topic]: Boolean(Number(msg.payloadString))
+					}
+				})
 				break;
-				default:
-					console.log(this.state);
-				}
-					
+			case 'soft_block/2':
+			case 'hard_block/2':
+				this.setState({
+					...this.state,
+					kran2: {
+						...this.state.kran2,
+						[topic]: Boolean(Number(msg.payloadString))
+					}
+				})
+				break;
+			default:
+				console.log(this.state);
+		}
 
-			
+
+
 	};
 
 	componentDidMount() {
@@ -106,14 +106,14 @@ class App extends Component {
 	}
 
 	handleChange = (event, kran_id) => {
-		
+
 		const value = Number(event.target.checked).toString()
 		const message = new Paho.MQTT.Message(value);
 		message.destinationName = `BBox/server/${event.target.name}/${kran_id}`
 		client.send(message);
 		const fileldName = event.target.name
 		console.log(message.destinationName);
-		
+
 		// axios.post(`api/${fileldName}/`, { kran_id, block: event.target.checked })
 		// 	.then(res => {
 		// 		if (res.data.kran_id == 1) {
@@ -141,7 +141,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className="container">
-				<div className="section" style={{ borderColor: this.state.kran1.hard_block || this.state.kran1.soft_block ? 'red' : 'green'}}>
+				<div className="section" style={{ borderColor: this.state.kran1.hard_block || this.state.kran1.soft_block ? 'red' : 'green' }}>
 					<h3>Tap 1 </h3>
 					<h4 className="status"> Status: {this.state.kran1.status} </h4>
 					{/* checkboxes block */}
@@ -156,7 +156,7 @@ class App extends Component {
 							onChange={(event) => this.handleChange(event, 1)}
 						/>
 						<button className="button" style={{ borderColor: this.state.kran1.soft_block ? 'red' : 'green' }}><label htmlFor="soft_block1"> soft block</label></button>
-										
+
 						<input
 							className="hidden"
 							type="checkbox"
@@ -167,33 +167,33 @@ class App extends Component {
 							onChange={(event) => this.handleChange(event, 1)}
 						/>
 						<button className="button" style={{ borderColor: this.state.kran1.hard_block ? 'red' : 'green' }}><label htmlFor="hard_block1"> hard block</label></button>
-					</div>		
+					</div>
 				</div>
 
-				<div className="section" style={{ borderColor: this.state.kran2.hard_block || this.state.kran2.soft_block ? 'red' : 'green'}}>
+				<div className="section" style={{ borderColor: this.state.kran2.hard_block || this.state.kran2.soft_block ? 'red' : 'green' }}>
 					<h3> Tap 2</h3>
 					<h4 className="status"> Status: {this.state.kran2.status} </h4>
 					<div className="buttons">
-					<input
-						className="hidden"
-						type="checkbox"
-						id="soft_block2"
-						name="soft_block"
-						value={this.state.kran2.soft_block}
-						checked={this.state.kran2.soft_block}
-						onChange={(event) => this.handleChange(event, 2)}
-					/>
-					<button className="button" style={{ borderColor: this.state.kran2.soft_block ? 'red' : 'green' }}><label htmlFor="soft_block2">soft  block</label></button>
-					<input
-						className="hidden"
-						type="checkbox"
-						id="hard_block2"
-						name="hard_block"
-						value={this.state.kran2.hard_block}
-						checked={this.state.kran2.hard_block}
-						onChange={(event) => this.handleChange(event, 2)}
-					/>
-					<button className="button" style={{ borderColor: this.state.kran2.hard_block ? 'red' : 'green' }}><label htmlFor="hard_block2"> hard block</label></button>
+						<input
+							className="hidden"
+							type="checkbox"
+							id="soft_block2"
+							name="soft_block"
+							value={this.state.kran2.soft_block}
+							checked={this.state.kran2.soft_block}
+							onChange={(event) => this.handleChange(event, 2)}
+						/>
+						<button className="button" style={{ borderColor: this.state.kran2.soft_block ? 'red' : 'green' }}><label htmlFor="soft_block2">soft  block</label></button>
+						<input
+							className="hidden"
+							type="checkbox"
+							id="hard_block2"
+							name="hard_block"
+							value={this.state.kran2.hard_block}
+							checked={this.state.kran2.hard_block}
+							onChange={(event) => this.handleChange(event, 2)}
+						/>
+						<button className="button" style={{ borderColor: this.state.kran2.hard_block ? 'red' : 'green' }}><label htmlFor="hard_block2"> hard block</label></button>
 					</div>
 				</div>
 			</div>
