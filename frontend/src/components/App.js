@@ -28,7 +28,6 @@ class App extends Component {
 
 	onMessageArrived = (msg) => {
 		const [name, source, topic, kran_id] =  msg.destinationName.split('/')
-		if(source == 'client'){
 			switch(`${topic}/${kran_id}`){	
 				case 'status/1':
 					this.setState({
@@ -72,9 +71,7 @@ class App extends Component {
 					console.log(this.state);
 				}
 					
-		}
-		else 
-		 console.log(source);
+
 			
 	};
 
@@ -117,34 +114,34 @@ class App extends Component {
 		const fileldName = event.target.name
 		console.log(message.destinationName);
 		
-		axios.post(`api/${fileldName}/`, { kran_id, block: event.target.checked })
-			.then(res => {
-				if (res.data.kran_id == 1) {
-					this.setState({
-						...this.state,
-						kran1: {
-							...this.state.kran1,
-							[fileldName]: res.data.block
-						}
-					})
-				}
-				if (res.data.kran_id == 2) {
-					this.setState({
-						...this.state,
-						kran2: {
-							...this.state.kran2,
-							[fileldName]: res.data.block
-						}
-					})
-				}
-			})
+		// axios.post(`api/${fileldName}/`, { kran_id, block: event.target.checked })
+		// 	.then(res => {
+		// 		if (res.data.kran_id == 1) {
+		// 			this.setState({
+		// 				...this.state,
+		// 				kran1: {
+		// 					...this.state.kran1,
+		// 					[fileldName]: res.data.block
+		// 				}
+		// 			})
+		// 		}
+		// 		if (res.data.kran_id == 2) {
+		// 			this.setState({
+		// 				...this.state,
+		// 				kran2: {
+		// 					...this.state.kran2,
+		// 					[fileldName]: res.data.block
+		// 				}
+		// 			})
+		// 		}
+		// 	})
 	}
 
 
 	render() {
 		return (
 			<div className="container">
-				<div className="section">
+				<div className="section" style={{ borderColor: this.state.kran1.hard_block || this.state.kran1.soft_block ? 'red' : 'green'}}>
 					<h3>Tap 1 </h3>
 					<h4 className="status"> Status: {this.state.kran1.status} </h4>
 					{/* checkboxes block */}
@@ -173,7 +170,7 @@ class App extends Component {
 					</div>		
 				</div>
 
-				<div className="section">
+				<div className="section" style={{ borderColor: this.state.kran2.hard_block || this.state.kran2.soft_block ? 'red' : 'green'}}>
 					<h3> Tap 2</h3>
 					<h4 className="status"> Status: {this.state.kran2.status} </h4>
 					<div className="buttons">
